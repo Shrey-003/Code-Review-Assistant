@@ -42,20 +42,7 @@ It analyzes code directly from GitHub repositories and provides intelligent, hum
 7. **Review AI Recommendations**  
    The app displays structured insights, explanations, and suggested improvements.
 
----
-
-## ⚙️ Local Setup (Developer Guide)
-
-If you’d like to run the project locally:
-
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/<your-username>/code-review-assistant.git
-cd code-review-assistant
-2️⃣ Create and activate virtual environment (using Poetry)
-poetry install
-3️⃣ Run the app
-poetry run streamlit run code_review_assistant/app.py
+🧩 Tech Stack
 
 | Component                   | Technology Used                                                          |
 | --------------------------- | ------------------------------------------------------------------------ |
@@ -69,3 +56,8 @@ poetry run streamlit run code_review_assistant/app.py
 | **Tree File Selector**      | [streamlit-tree-select](https://pypi.org/project/streamlit-tree-select/) |
 | **Numerical Support**       | numpy                                                                    |
 | **Frontend**                | Streamlit Components (custom UI widgets)                                 |
+
+
+
+---
+
