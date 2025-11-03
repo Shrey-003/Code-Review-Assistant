@@ -13,6 +13,8 @@ gitpython = "^3.1.31"
 streamlit = "^1.20.0"
 streamlit-tree-select = "^0.0.5"
 tiktoken = "^0.4.0"
+# Added below to ensure compatibility during builds
+numpy = "^1.26.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
@@ -20,7 +22,7 @@ flake8 = "^6.0.0"
 isort = "^5.12.0"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core", "setuptools>=61.0", "wheel"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
