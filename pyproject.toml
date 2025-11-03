@@ -13,8 +13,10 @@ gitpython = "^3.1.31"
 streamlit = "^1.20.0"
 streamlit-tree-select = "^0.0.5"
 tiktoken = "^0.4.0"
-# Added below to ensure compatibility during builds
+# ensure compatibility during builds
 numpy = "^1.26.0"
+# pinned to avoid source-compilation on Cloud
+frozenlist = ">=1.4.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
