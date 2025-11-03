@@ -1,19 +1,18 @@
 [tool.poetry]
-name = "chatgpt-code-review"
+name = "code-review-assistant"
 version = "0.1.0"
-description = ""
-authors = ["Dominic Thorn <dominic.thorn@gmail.com>"]
+description = "AI-powered tool that reviews code from GitHub repositories and provides improvement suggestions."
+authors = ["Shrey <your-email@example.com>"]
 readme = "README.md"
-packages = [{include = "chatgpt_code_review"}]
+packages = [{include = "code_review_assistant"}]
 
 [tool.poetry.dependencies]
-python = ">=3.9.0,<3.11,!=3.9.7"
+python = ">=3.9.0,<4.0"
 openai = "^0.27.2"
 gitpython = "^3.1.31"
 streamlit = "^1.20.0"
 streamlit-tree-select = "^0.0.5"
 tiktoken = "^0.4.0"
-
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
@@ -45,4 +44,4 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
-known_first_party = "chatgpt_code_review"
+known_first_party = "code_review_assistant"

@@ -1,5 +1,5 @@
 import os
-
+import tempfile
 import about
 import display
 import download
@@ -12,8 +12,8 @@ import utils
 env_file_path = ".env"
 log_file = "app.log"
 
-
-temp_dir = "/tmp/chatgpt-code-review"
+# Use a platform-independent temp dir under the system temp directory
+temp_dir = os.path.join(tempfile.gettempdir(), "code_review_assistant")
 
 
 def app():
@@ -21,20 +21,24 @@ def app():
     utils.set_environment_variables()
     utils.configure_logging(log_file)
 
+    # Keep using your TempDirContext (it should handle cleanup)
     with utils.TempDirContext(temp_dir):
         st.set_page_config(
-            page_title="ChatGPT Code Review",
+            page_title="Code Review Assistant",
+            page_icon="🔍",
+            layout="wide",
         )
 
         session_state = st.session_state
 
-        st.title("ChatGPT Code Review :rocket:")
+        st.title("Code Review Assistant")
 
-        with st.expander("About ChatGPT Code Review"):
+        with st.expander("About Code Review Assistant"):
             st.markdown(about.about_section, unsafe_allow_html=True)
             st.write("")
 
-        default_repo_url = "https://github.com/domvwt/chatgpt-code-review"
+        # default repo URL updated to the new repository name
+        default_repo_url = "https://github.com/Shrey-003/Code-Review-Assistant"
         repo_form = forms.RepoForm(default_repo_url)
         with st.form("repo_url_form"):
             repo_form.display_form()
@@ -49,10 +53,8 @@ def app():
         with st.form("analyze_files_form"):
             if repo_form.clone_repo_button or session_state.get("code_files"):
                 if not session_state.get("code_files"):
-                    session_state.code_files = (
-                        repo.list_code_files_in_repository(
-                            repo_url, extensions
-                        )
+                    session_state.code_files = repo.list_code_files_in_repository(
+                        repo_url, extensions
                     )
 
                 analyze_files_form.display_form()
@@ -75,15 +77,11 @@ def app():
                         else:
                             first = False
                         st.subheader(display.escape_markdown(rec["code_file"]))
-                        recommendation = (
-                            rec["recommendation"] or "No recommendations"
-                        )
+                        recommendation = rec.get("recommendation") or "No recommendations"
                         st.markdown(recommendation)
                         with st.expander("View Code"):
                             extension = os.path.splitext(rec["code_file"])[1]
-                            display.display_code(
-                                rec["code_snippet"], extension
-                            )
+                            display.display_code(rec["code_snippet"], extension)
                         recommendation_list.append(rec)
                     if recommendation_list:
                         session_state.recommendation_list = recommendation_list
